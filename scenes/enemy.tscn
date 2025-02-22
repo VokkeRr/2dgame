@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbp3jr5i6y8jc"]
+
+[ext_resource type="Script" path="res://scenes/enemy.gd" id="1_ari55"]
+[ext_resource type="Texture2D" uid="uid://gnarr4knk2sj" path="res://assets/enemy.png" id="1_kt651"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_x8pbk"]
+polygon = PackedVector2Array(-8, -47, 8, -47, 17, -44, 26, -39, 36, -31, 44, -21, 50, -8, 54, 6, 54, 24, 51, 31, 47, 37, 42, 41, 33, 45, 26, 46, 23, 47, -22, 47, -30, 45, -38, 43, -46, 38, -52, 30, -54, 22, -54, 5, -50, -9, -44, -20, -37, -29, -29, -36, -20, -42)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32bxs"]
+size = Vector2(87, 69)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_42205"]
+size = Vector2(60, 12.25)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 9
+script = ExtResource("1_ari55")
+score = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -47)
+texture = ExtResource("1_kt651")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_x8pbk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -34.5)
+shape = SubResource("RectangleShape2D_32bxs")
+
+[node name="Bounse_area" type="Area2D" parent="."]
+position = Vector2(0, -79)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bounse_area"]
+position = Vector2(0, -3)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_42205")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(-4.76837e-07, -47)
+scale = Vector2(5.4, 4.7)
+
+[connection signal="area_entered" from="Bounse_area" to="." method="_on_bounse_area_area_entered"]

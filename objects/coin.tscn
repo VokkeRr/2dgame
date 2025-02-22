@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://b7ca1uvv2ubsg"]
+
+[ext_resource type="Script" path="res://coin.gd" id="1_5oglp"]
+[ext_resource type="Texture2D" uid="uid://cqaphp0erxpqv" path="res://assets/coin.png" id="1_v1w6p"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e5fl1"]
+polygon = PackedVector2Array(0, -34, 7, -34, 15, -31, 21, -27, 25, -24, 28, -20, 31, -15, 34, -8, 34, 8, 31, 15, 28, 20, 25, 24, 22, 27, 18, 30, 11, 33, 7, 34, -8, 34, -16, 31, -23, 26, -28, 21, -32, 15, -34, 8, -34, -8, -29, -19, -22, -27, -15, -32, -7, -34)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l1iv7"]
+radius = 33.3766
+
+[sub_resource type="Animation" id="Animation_ml30a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_d4pgb"]
+resource_name = "bouncing"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.406127, 2.46229),
+"update": 0,
+"values": [Vector2(0, 10), Vector2(0, -10)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.406127, 2.46229),
+"update": 0,
+"values": [Vector2(0, 10), Vector2(0, -10)]
+}
+
+[sub_resource type="Animation" id="Animation_poo7e"]
+resource_name = "fade_out"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v68ur"]
+_data = {
+"RESET": SubResource("Animation_ml30a"),
+"bouncing": SubResource("Animation_d4pgb"),
+"fade_out": SubResource("Animation_poo7e")
+}
+
+[node name="Coin" type="Area2D"]
+collision_layer = 4
+script = ExtResource("1_5oglp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v1w6p")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_e5fl1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_l1iv7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v68ur")
+}
+autoplay = "bouncing"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

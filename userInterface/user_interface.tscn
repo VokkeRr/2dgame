@@ -1,0 +1,76 @@
+[gd_scene load_steps=7 format=3 uid="uid://7dlj31m0wifh"]
+
+[ext_resource type="Theme" uid="uid://cyccwmm66tncl" path="res://userInterface/default_theme.tres" id="1_kpfan"]
+[ext_resource type="Script" path="res://userInterface/user_interface.gd" id="2_tdo2y"]
+[ext_resource type="PackedScene" uid="uid://dm41t8xhw3d7d" path="res://userInterface/title.tscn" id="2_v4kmm"]
+[ext_resource type="PackedScene" uid="uid://ckuayulxlqp4i" path="res://userInterface/change_scene_btn.tscn" id="3_mtkqc"]
+[ext_resource type="PackedScene" uid="uid://dqgum5sv2mhn8" path="res://userInterface/retry_btn.tscn" id="4_0h3ho"]
+[ext_resource type="PackedScene" uid="uid://dvyhmmdktjwlf" path="res://userInterface/quit_btn.tscn" id="4_da057"]
+
+[node name="UserInterface" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_kpfan")
+script = ExtResource("2_tdo2y")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -250.0
+offset_top = 75.0
+offset_right = -85.0
+offset_bottom = 118.0
+grow_horizontal = 0
+text = "Score: %s"
+horizontal_alignment = 2
+
+[node name="PauseOverlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.231373, 0.231373, 0.231373, 0.788235)
+
+[node name="Title" parent="PauseOverlay" instance=ExtResource("2_v4kmm")]
+layout_mode = 1
+offset_left = -180.5
+offset_top = 306.0
+offset_right = 180.5
+offset_bottom = 382.0
+theme_override_font_sizes/font_size = 61
+text = "PAUSED"
+
+[node name="PauseMenu" type="VBoxContainer" parent="PauseOverlay"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -207.0
+offset_top = -125.0
+offset_right = 207.0
+offset_bottom = 275.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RetryBtn" parent="PauseOverlay/PauseMenu" instance=ExtResource("4_0h3ho")]
+layout_mode = 2
+
+[node name="ChangeSceneButton2" parent="PauseOverlay/PauseMenu" instance=ExtResource("3_mtkqc")]
+layout_mode = 2
+text = "Main Screen"
+scene = "res://scenes/main_screen.tscn"
+
+[node name="QuitBtn" parent="PauseOverlay/PauseMenu" instance=ExtResource("4_da057")]
+layout_mode = 2

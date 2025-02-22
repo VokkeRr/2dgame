@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=3 uid="uid://bf1e00l1y1ilp"]
+
+[ext_resource type="Theme" uid="uid://cyccwmm66tncl" path="res://userInterface/default_theme.tres" id="1_f1lx1"]
+[ext_resource type="Texture2D" uid="uid://bjhv1ry1np1c1" path="res://assets/background.png" id="1_otgql"]
+[ext_resource type="PackedScene" uid="uid://dm41t8xhw3d7d" path="res://userInterface/title.tscn" id="2_8uvdc"]
+[ext_resource type="PackedScene" uid="uid://ckuayulxlqp4i" path="res://userInterface/change_scene_btn.tscn" id="3_0xgl0"]
+[ext_resource type="PackedScene" uid="uid://dvyhmmdktjwlf" path="res://userInterface/quit_btn.tscn" id="4_7pvcp"]
+
+[node name="MainScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_f1lx1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_otgql")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Title" parent="." instance=ExtResource("2_8uvdc")]
+layout_mode = 1
+offset_left = -185.0
+offset_top = 302.0
+offset_right = 185.0
+offset_bottom = 345.0
+theme_override_colors/font_color = Color(0.890196, 0.411765, 0.337255, 1)
+text = "__CUBE STORY__"
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.5
+offset_top = -84.0
+offset_right = 149.5
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayBtn" parent="Menu" instance=ExtResource("3_0xgl0")]
+layout_mode = 2
+scene = "res://scenes/level_1.tscn"
+
+[node name="QuitBtn" parent="Menu" instance=ExtResource("4_7pvcp")]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -166.0
+offset_top = 302.0
+offset_right = 185.0
+offset_bottom = 350.0
+grow_horizontal = 2
+bbcode_enabled = true
+text = "[wave] __CUBE STORY__ [/wave]"

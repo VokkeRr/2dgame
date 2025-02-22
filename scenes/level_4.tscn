@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=3 uid="uid://c0vnwdxlg52u5"]
+
+[ext_resource type="Theme" uid="uid://cyccwmm66tncl" path="res://userInterface/default_theme.tres" id="1_b2gx1"]
+[ext_resource type="Script" path="res://scenes/end_screen.gd" id="2_qwen4"]
+[ext_resource type="Texture2D" uid="uid://bjhv1ry1np1c1" path="res://assets/background.png" id="3_tpbis"]
+[ext_resource type="PackedScene" uid="uid://ckuayulxlqp4i" path="res://userInterface/change_scene_btn.tscn" id="4_y7ygy"]
+[ext_resource type="PackedScene" uid="uid://dvyhmmdktjwlf" path="res://userInterface/quit_btn.tscn" id="5_2ohox"]
+[ext_resource type="PackedScene" uid="uid://dm41t8xhw3d7d" path="res://userInterface/title.tscn" id="6_mms62"]
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b2gx1")
+script = ExtResource("2_qwen4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_tpbis")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Menu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -149.5
+offset_top = -11.0
+offset_right = 149.5
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="PlayBtn" parent="Menu" instance=ExtResource("4_y7ygy")]
+layout_mode = 2
+text = "Main Screen"
+scene = "res://scenes/main_screen.tscn"
+
+[node name="QuitBtn" parent="Menu" instance=ExtResource("5_2ohox")]
+layout_mode = 2
+
+[node name="Title" parent="." instance=ExtResource("6_mms62")]
+layout_mode = 1
+offset_left = -305.5
+offset_top = 344.0
+offset_right = 305.5
+offset_bottom = 387.0
+text = "Поздравляем, вы прошли игру!"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -241.0
+offset_top = 412.0
+offset_right = 241.0
+offset_bottom = 501.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 17
+text = "Score: %s.
+Attempts: %s."
+horizontal_alignment = 1

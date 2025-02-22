@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cyccwmm66tncl"]
+
+[ext_resource type="FontFile" path="res://assets/font_default.tres" id="1_3fllj"]
+[ext_resource type="StyleBox" uid="uid://bcf5hku68mprl" path="res://userInterface/button_normal.tres" id="1_6wssc"]
+[ext_resource type="StyleBox" uid="uid://bwucd0bn8d784" path="res://userInterface/button_pressed.tres" id="2_d3xt5"]
+
+[resource]
+default_font = ExtResource("1_3fllj")
+default_font_size = 35
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/styles/hover = ExtResource("1_6wssc")
+Button/styles/normal = ExtResource("1_6wssc")
+Button/styles/pressed = ExtResource("2_d3xt5")
+VBoxContainer/constants/separation = 20

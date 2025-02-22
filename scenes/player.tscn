@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbhlqienl4udq"]
+
+[ext_resource type="Texture2D" uid="uid://b55yc06ava8l1" path="res://assets/player.png" id="1_2yt3w"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_du0te"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1wvxs"]
+polygon = PackedVector2Array(-34, -48, -40, -45, -43, -42, -47, -37, -48, -34, -48, 35, -45, 39, -42, 43, -37, 47, -32, 48, 34, 48, 40, 45, 43, 42, 47, 37, 48, 34, 48, -34, 46, -39, 43, -42, 38, -46, 34, -48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shnkj"]
+size = Vector2(80, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k1o11"]
+size = Vector2(92, 87)
+
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 26
+script = ExtResource("1_du0te")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -48)
+texture = ExtResource("1_2yt3w")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
+occluder = SubResource("OccluderPolygon2D_1wvxs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -44)
+shape = SubResource("RectangleShape2D_shnkj")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+limit_left = 0
+limit_bottom = 1280
+position_smoothing_enabled = true
+drag_vertical_enabled = true
+
+[node name="Detector" type="Area2D" parent="."]
+position = Vector2(0, -44)
+collision_mask = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detector"]
+position = Vector2(0, -4.5)
+shape = SubResource("RectangleShape2D_k1o11")
+
+[connection signal="area_entered" from="Detector" to="." method="_on_detector_area_entered"]
+[connection signal="body_entered" from="Detector" to="." method="_on_detector_body_entered"]

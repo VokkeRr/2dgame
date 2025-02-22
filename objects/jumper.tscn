@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2og0j5thb7jk"]
+
+[ext_resource type="Texture2D" uid="uid://duev2be0v0ss1" path="res://assets/bumper.png" id="1_v8yqr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1138g"]
+radius = 24.0
+height = 108.0
+
+[node name="Jumper" type="Area2D"]
+collision_layer = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -39)
+texture = ExtResource("1_v8yqr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -42)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1138g")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(0, -72)
+polygon = PackedVector2Array(-12, -5, 15, -5, 31, 0, 44, 8, 52, 19, -51, 19, -38, 5, -26, -1)
