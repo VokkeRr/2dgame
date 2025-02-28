@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcgpdbqh1bdkw"]
+
+[ext_resource type="Script" path="res://scenes/snakegame/snake.gd" id="1_k8rko"]
+
+[node name="Snake" type="Node2D"]
+script = ExtResource("1_k8rko")
+
+[node name="SnakeParts" type="Node" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
